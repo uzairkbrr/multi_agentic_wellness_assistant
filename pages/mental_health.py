@@ -18,6 +18,12 @@ if "mh_messages" not in st.session_state:
         {"role": "system", "content": "You are a supportive, empathetic mental health assistant. Keep responses concise and gentle."}
     ]
 
+# Recall past insights at the top
+with st.expander("Recall past insights"):
+    memories = list_memories(st.session_state.user["id"], limit=20)
+    for m in memories:
+        st.markdown(f"- {m['created_at']}: {m['summary']}")
+
 col1, col2 = st.columns([3, 1])
 with col1:
     enable_memory = st.toggle("Store key insights to long-term memory")
@@ -31,10 +37,8 @@ with col2:
 
 left, right = st.columns([1,3])
 with left:
-    st.subheader("Past Insights")
-    memories = list_memories(st.session_state.user["id"], limit=30)
-    for m in memories:
-        st.markdown(f"- {m['created_at'][:16]} — {m['summary'][:60]}…")
+    # Past Insights section removed
+    pass
 with right:
     for msg in st.session_state.mh_messages[1:]:
         if msg["role"] == "user":
@@ -61,10 +65,5 @@ if prompt:
         except Exception as e:
             st.warning(f"Memory save failed: {e}")
     log_activity(st.session_state.user["id"], "mh_chat", {"prompt": prompt[:120], "reply_len": len(reply)})
-
-with st.expander("Recall past insights"):
-    memories = list_memories(st.session_state.user["id"], limit=20)
-    for m in memories:
-        st.markdown(f"- {m['created_at']}: {m['summary']}")
 
  

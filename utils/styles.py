@@ -12,7 +12,7 @@ def inject_landing_theme() -> None:
     padding-block: 2rem;
 }
 .st-emotion-cache-18kf3ut , .st-emotion-cache-18tdrd9 h2{
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
     margin: 0 auto;
 }
@@ -117,13 +117,13 @@ def inject_landing_theme() -> None:
   .testimonial-card { flex: none; width: 90vw; max-width: none; margin-bottom: 1.5rem; }
 }
 
-#faq { max-width: 800px; margin: 0 auto; padding: 2rem 1rem 0 1rem; color: #0f172a; user-select: none; }
+#faq { max-width: 900px; margin: 0 auto; padding: 2rem 1rem 0 1rem; color: #0f172a; user-select: none; }
 #faq h2 { font-size: 2.6rem; font-weight: 800; margin-bottom: 2rem; text-align: center; color: #fff; }
 .stExpander > div[role="button"] { font-weight: 700 !important; font-size: 1.2rem !important; color: #1e90ff !important; user-select: none; cursor: pointer; }
-.st-emotion-cache-p6n0jw { max-width: 800px; margin: 0 auto; }
-.stExpanderContent { max-width: 800px !important; margin: 0 auto !important; color: #334155; font-size: 1rem; line-height: 1.5; }
-.st-emotion-cache-9ajs8n h2{ margin: 0 auto; max-width: 800px; width: 100%; font-size: 2.6rem; font-weight: 800; padding-bottom: 0; color: #fff; }
-.st-emotion-cache-zuyloh { max-width: 800px; width: 100%; margin: 0 auto; }
+.st-emotion-cache-p6n0jw { max-width: 900px; margin: 0 auto; }
+.stExpanderContent { max-width: 900px !important; margin: 0 auto !important; color: #334155; font-size: 1rem; line-height: 1.5; }
+.st-emotion-cache-9ajs8n h2{ margin: 0 auto; max-width: 900px; width: 100%; font-size: 2.6rem; font-weight: 800; padding-bottom: 0; color: #fff; }
+.st-emotion-cache-zuyloh { max-width: 900px; width: 100%; margin: 0 auto; }
 
 footer { position: sticky; bottom: 0; margin: 10px 40px 20px 40px; background: rgba(30, 144, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 15px; padding: 1.5rem 2rem; color: #1e90ff; font-size: 0.9rem; user-select: none; box-shadow: 0 8px 32px 0 rgba(30, 144, 255, 0.1); z-index: 1000; max-width: 1200px; margin-left: auto; margin-right: auto; }
 .footer-links-container { display: flex; align-items: start; justify-content: space-around; margin-top: 30px; }

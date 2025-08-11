@@ -4,6 +4,19 @@ from backend.auth import register_user, login_user, fetch_user
 from utils.styles import inject_landing_theme
 
 
+st.markdown("""
+<style>
+.st-emotion-cache-8fjoqp,
+.st-emotion-cache-vqhohv p,
+.st-ba, 
+.st-emotion-cache-9ajs8n h1 {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+""", unsafe_allow_html=True)
+
+
 st.set_page_config(page_title="Multi-Agentic Wellness Assistant", layout="wide")
 
 

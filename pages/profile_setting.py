@@ -15,45 +15,90 @@ if "user" not in st.session_state or not st.session_state.user:
     st.stop()
 
 
+# Center all content on the profile page
+st.markdown("""
+<style>
+.st-emotion-cache-v3w3zg,
+.st-emotion-cache-r6om3p,
+.st-emotion-cache-9ko04w {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.profile-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.profile-title {
+    text-align: center;
+    margin-bottom: 10px;
+    # width: 100%;
+}
+.profile-caption {
+    text-align: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+.profile-mode {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+.profile-section {
+    margin-bottom: 30px;
+    width: 100%;
+}
+.profile-form-container {
+    width: 100%;
+    max-width: 100%;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="profile-container">', unsafe_allow_html=True)
+
+st.markdown('<div class="profile-title">', unsafe_allow_html=True)
 st.title("Profile")
+st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('<div class="profile-caption">', unsafe_allow_html=True)
 st.caption("Set up your profile once, then review and tweak anytime.")
+st.markdown('</div>', unsafe_allow_html=True)
 
 u = st.session_state.user
 # Default to Edit for new/incomplete profiles
 is_incomplete = not any([u.get("age"), u.get("fitness_goal"), u.get("activity_level")])
+
+st.markdown('<div class="profile-mode">', unsafe_allow_html=True)
 mode = st.radio("Mode", ["View", "Edit"], index=(1 if is_incomplete else 0), horizontal=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 if mode == "Edit":
-    st.subheader("Profile Photo / Avatar")
-    colA, colB = st.columns(2)
-    with colA:
-        upload = st.file_uploader("Upload Profile Photo", type=["jpg", "jpeg", "png"], key="profile_photo")
-        if upload is not None:
-            try:
-                os.makedirs("data/profile", exist_ok=True)
-                filename = f"user_{u['id']}_{upload.name}"
-                save_path = os.path.join("data", "profile", filename)
-                with open(save_path, "wb") as f:
-                    f.write(upload.getbuffer())
-                upsert_profile_media(u["id"], photo_path=save_path, avatar_choice=None)
-                st.session_state.user["profile_photo_path"] = save_path
-                log_activity(u["id"], "profile_update", {"photo": True})
-                st.success("Photo updated.")
-                st.image(save_path, width=160)
-            except Exception as e:
-                st.error(f"Upload failed: {e}")
-    with colB:
-        st.write("Or choose an avatar")
-        avatars = ["🧘", "🏋️", "🥗", "🏃", "🌟", "💪", "😊"]
-        choice = st.selectbox("Avatar", avatars, key="avatar_choice")
-        if st.button("Set Avatar"):
-            upsert_profile_media(u["id"], photo_path=None, avatar_choice=choice)
-            st.session_state.user["avatar_choice"] = choice
-            log_activity(u["id"], "profile_update", {"avatar": choice})
-            st.success("Avatar set.")
-            st.markdown(f"Current avatar: {choice}")
+    st.markdown('<div class="profile-section">', unsafe_allow_html=True)
+    st.subheader("Profile Photo")
+    # Upload section with same width as the form
+    upload = st.file_uploader("Upload Profile Photo", type=["jpg", "jpeg", "png"], key="profile_photo")
+    if upload is not None:
+        try:
+            os.makedirs("data/profile", exist_ok=True)
+            filename = f"user_{u['id']}_{upload.name}"
+            save_path = os.path.join("data", "profile", filename)
+            with open(save_path, "wb") as f:
+                f.write(upload.getbuffer())
+            upsert_profile_media(u["id"], photo_path=save_path, avatar_choice=None)
+            st.session_state.user["profile_photo_path"] = save_path
+            log_activity(u["id"], "profile_update", {"photo": True})
+            st.success("Photo updated.")
+            st.image(save_path, width=160)
+        except Exception as e:
+            st.error(f"Upload failed: {e}")
+    st.markdown('</div>', unsafe_allow_html=True)
 
-if mode == "Edit":
+    st.markdown('<div class="profile-section profile-form-container">', unsafe_allow_html=True)
     with st.form("profile_form"):
         row1 = st.columns(3)
         with row1[0]:
@@ -104,8 +149,10 @@ if mode == "Edit":
             st.session_state.user.update(fields)
             log_activity(u["id"], "profile_update", {"fields": list(fields.keys())})
             st.success("Profile updated.")
+        st.markdown('</div>', unsafe_allow_html=True)
 
 if mode == "View":
+    st.markdown('<div class="profile-section">', unsafe_allow_html=True)
     # Futuristic profile display
     name = u.get('name', '-')
     age = u.get('age', '-')
@@ -119,7 +166,8 @@ if mode == "View":
     medical = u.get('medical_conditions', '-')
 
     photo_path = u.get("profile_photo_path")
-    avatar_choice = u.get("avatar_choice", "🌟")
+    # Default avatar when no photo is available
+    default_avatar = "🌟"
 
     st.markdown(
         """
@@ -151,9 +199,9 @@ if mode == "View":
             img_src = f"data:{mime};base64,{b64}"
             avatar_html = f"<div class='avatar-wrap'><img src='{img_src}' alt='profile photo'/></div>"
         except Exception:
-            avatar_html = f"<div class='avatar-wrap'><div class='avatar-emoji'>{avatar_choice}</div></div>"
+            avatar_html = f"<div class='avatar-wrap'><div class='avatar-emoji'>{default_avatar}</div></div>"
     else:
-        avatar_html = f"<div class='avatar-wrap'><div class='avatar-emoji'>{avatar_choice}</div></div>"
+        avatar_html = f"<div class='avatar-wrap'><div class='avatar-emoji'>{default_avatar}</div></div>"
 
     # First row: profile picture centered, then subsequent rows for info
     st.markdown(
@@ -182,5 +230,9 @@ if mode == "View":
     st.divider()
     st.page_link("pages/challenges.py", label="View Challenges ➜", icon="🔥")
     st.page_link("pages/dashboard.py", label="Go to Dashboard ➜", icon="🏠")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# Close the main profile container
+st.markdown('</div>', unsafe_allow_html=True)
 
  

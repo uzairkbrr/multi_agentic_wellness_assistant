@@ -16,6 +16,18 @@ from backend.crud import (
 from agents.diet import extract_meal_name
 
 
+st.markdown("""
+<style>
+
+.st-emotion-cache-1r6slb0,
+.st-emotion-cache-9ajs8n h1 {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+""", unsafe_allow_html=True)
+
+
 if "user" not in st.session_state or st.session_state.user is None:
     st.warning("Please log in to access this page.")
     st.stop()
@@ -108,22 +120,11 @@ try:
     # Create year toggle buttons
     st.markdown('<div class="section-card"><h3>Streaks & Consistency</h3>', unsafe_allow_html=True)
     
-    # Year toggle buttons (GitHub-style)
-    st.markdown('<div class="year-toggle-container">', unsafe_allow_html=True)
-    year_buttons = st.columns(len(available_years))
-    selected_year = current_year
-    for i, year in enumerate(available_years):
-        with year_buttons[i]:
-            if st.button(f"{year}", key=f"year_{year}", 
-                       type="primary" if year == current_year else "secondary",
-                       use_container_width=True):
-                selected_year = year
-                st.session_state.selected_year = year
-    st.markdown('</div>', unsafe_allow_html=True)
-    
     # Use selected year from session state or default to current year
     if "selected_year" in st.session_state:
         selected_year = st.session_state.selected_year
+    else:
+        selected_year = current_year
     
     # Calculate date range for selected year
     if selected_year == current_year:
@@ -209,7 +210,7 @@ try:
 
         heatmap = (
             alt.Chart(df)
-            .mark_square(size=40)  # Increased to 40px for even bigger dots
+            .mark_square(size=40)  # Increased to 60px for even bigger dots
             .encode(
                 x=alt.X("week_index:O", axis=None),
                 y=alt.Y("dow:O", sort=[0, 1, 2, 3, 4, 5, 6], axis=None),
@@ -223,7 +224,7 @@ try:
                     alt.Tooltip("count:Q", title="Activities"),
                 ],
             )
-            .properties(width=900, height={"step": 10})  # Fixed width of 900px, reduced step size to bring dots closer together
+            .properties(width=900, height={"step": 8})  # Fixed width of 900px, reduced step size to bring dots closer together horizontally
         )
 
         # Display streak information
@@ -248,22 +249,25 @@ try:
             )
         
         st.markdown('<div style="margin-top:10px"></div>', unsafe_allow_html=True)
-        st.altair_chart(heatmap, use_container_width=True)
         
-        # Add legend below the heatmap
-        st.markdown(
-            '<div class="heatmap-legend">'
-            '<span class="legend-item">'
-            '<span class="legend-color" style="background-color: #9e9e9e;"></span>'
-            'No activity'
-            '</span>'
-            '<span class="legend-item">'
-            '<span class="legend-color" style="background-color: #39d353;"></span>'
-            'Activity logged'
-            '</span>'
-            '</div>',
-            unsafe_allow_html=True
-        )
+        # Create side-by-side layout: heatmap on left, year selection on right
+        heatmap_col, year_col = st.columns([4, 1])
+        
+        with heatmap_col:
+            st.altair_chart(heatmap, use_container_width=True)
+        
+        with year_col:
+            st.markdown('<div style="margin-top:20px;"></div>', unsafe_allow_html=True)
+            # Right-align the year buttons using CSS
+            st.markdown('<div style="text-align: right;">', unsafe_allow_html=True)
+            for year in available_years:
+                if st.button(f"{year}", key=f"year_{year}", 
+                           type="secondary" if year == current_year else "secondary",
+                           use_container_width=False):
+                    selected_year = year
+                    st.session_state.selected_year = year
+                    st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
     else:
