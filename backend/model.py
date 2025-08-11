@@ -49,4 +49,5 @@ class MealLog:
     image_path: Optional[str]
     calories_est: Optional[float]
     macros_json: Optional[str]
+    meal_name: Optional[str]
 

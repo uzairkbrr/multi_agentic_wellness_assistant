@@ -250,6 +250,7 @@ st.markdown(
                 <a href="#contact">Therapy Locator</a>
             </div>
             <div class="social-icons">
+                <a href="https://uzairkbrr.netlify.app/" aria-label="Portfolio" title="Portfolio">Portfolio</a>
                 <a href="https://www.linkedin.com/in/uzairkbrr/" aria-label="LinkedIn" title="LinkedIn">Linkedin</a>
                 <a href="https://github.com/uzairkbrr " aria-label="GitHub" title="GitHub">GitHub</a>
                 <a href="https://x.com/uzairkbrr" aria-label="Twitter" title="Twitter">Twitter</a>

@@ -3,8 +3,9 @@ import os
 from datetime import datetime
 import streamlit as st
 from backend.database import init_db
+from PIL import Image, ImageOps
 
-from agents.diet import get_diet_suggestion
+from agents.diet import get_diet_suggestion, extract_meal_name
 from agents.vision import analyze_meal_image
 from backend.crud import insert_meal_log, list_meal_logs, log_activity
 from utils.styles import inject_landing_theme
@@ -58,12 +59,25 @@ with tabs[1]:
         save_path = os.path.join("data", "uploads", f"{datetime.utcnow().timestamp()}_{upload.name}")
         with open(save_path, "wb") as f:
             f.write(img_bytes)
-        st.image(save_path, caption="Uploaded meal")
+        # Display a 300x300 preview (without altering the saved original)
+        try:
+            _img = Image.open(os.path.join("data", "uploads", os.path.basename(save_path)))
+            _img = _img.convert("RGB")
+            preview = ImageOps.pad(_img, (300, 300), color=(255, 255, 255))
+            st.image(preview, caption="Uploaded meal")
+        except Exception:
+            # Fallback to native display with constrained width
+            st.image(save_path, caption="Uploaded meal", width=300)
         with st.spinner("Analyzing image..."):
             analysis = analyze_meal_image(save_path)
         # Show readable text instead of JSON
         raw_text = analysis.get("raw", "") if isinstance(analysis, dict) else str(analysis)
         st.markdown(raw_text)
+        # Extract a concise meal name from the vision output
+        try:
+            meal_name = extract_meal_name(raw_text)
+        except Exception:
+            meal_name = None
         # Try to parse calorie/macros if provided in JSON text
         calories = None
         macros_json = None
@@ -81,6 +95,7 @@ with tabs[1]:
             image_path=save_path,
             calories_est=calories,
             macros_json=macros_json,
+            meal_name=meal_name,
         )
         log_activity(st.session_state.user["id"], "meal_log", {"image_path": save_path, "calories": calories})
 
@@ -88,6 +103,13 @@ with tabs[2]:
     st.subheader("Recent Meals")
     logs = list_meal_logs(st.session_state.user["id"], limit=20)
     for log in logs:
-        st.markdown(f"- {log['date']}: {log.get('description') or ''} {('(image) ' + log['image_path']) if log.get('image_path') else ''} {('~' + str(log['calories_est']) + ' kcal') if log.get('calories_est') else ''}")
+        name = log.get("meal_name") or (log.get("description") or "Meal")
+        meta = []
+        if log.get("image_path"):
+            meta.append("(image)")
+        if log.get("calories_est"):
+            meta.append(f"~{log['calories_est']} kcal")
+        suffix = (" " + " ".join(meta)) if meta else ""
+        st.markdown(f"- {log['date']}: {name}{suffix}")
 
  

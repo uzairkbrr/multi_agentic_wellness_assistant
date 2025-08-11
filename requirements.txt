@@ -6,3 +6,5 @@ Pillow
 requests
 typing_extensions
 reportlab
+altair
+pandas

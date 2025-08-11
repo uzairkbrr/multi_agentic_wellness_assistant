@@ -39,3 +39,50 @@ def get_diet_suggestion(messages: List[Dict[str, str]]) -> str:
     if content is None:
         content = ""
     return content
+
+
+def extract_meal_name(meal_text: str) -> str:
+    """Return only the concise meal name for a given free-text description.
+
+    The model is instructed to reply with the exact meal name only, without
+    extra words, punctuation, emojis, or explanations. Falls back to the
+    original text if the model cannot produce a response.
+    """
+    if not meal_text:
+        return "Meal"
+    client = _client()
+    system = {
+        "role": "system",
+        "content": (
+            "You extract a concise food dish name from user-provided text. "
+            "Output ONLY the dish name, with no extra words, no punctuation, "
+            "no quotes, no emojis. Examples: '\"I had a grilled chicken salad\"' -> 'Grilled Chicken Salad'; "
+            "'2 eggs, toast and coffee' -> 'Eggs and Toast'."
+        ),
+    }
+    user = {"role": "user", "content": f"Text: {meal_text}\nDish name:"}
+    try:
+        response = client.chat.completions.create(
+            model=TEXT_MODEL,
+            messages=[system, user],
+            temperature=0.0,
+            max_tokens=32,
+        )
+        message = response.choices[0].message
+        content = getattr(message, "content", None)
+        if isinstance(content, list):
+            parts = []
+            for part in content:
+                if isinstance(part, dict) and part.get("type") == "text":
+                    parts.append(part.get("text", ""))
+                elif isinstance(part, str):
+                    parts.append(part)
+            content = "\n".join([p for p in parts if p])
+        if isinstance(content, str):
+            name = content.strip().strip('"').strip("'")
+            # Guardrail: keep it short
+            if 0 < len(name) <= 80:
+                return name
+    except Exception:
+        pass
+    return meal_text.strip()

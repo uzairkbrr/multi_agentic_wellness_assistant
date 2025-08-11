@@ -140,6 +140,187 @@ footer .social-icons a:hover::after { width: 100%; }
 footer .social-icons a:hover { color: #fff; }
 
 @media (max-width: 480px) { footer { flex-direction: column; gap: 1.5rem; } }
+
+/* --- Dashboard Cards --- */
+.kpi-grid {
+  display: flex;
+  gap: 1rem;
+  margin: 0.75rem 0 1.25rem 0;
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+.kpi-card {
+  background: rgba(255, 255, 255, 0.66);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(30,144,255,0.16);
+  box-sizing: border-box;
+  flex: 1 1 calc(25% - 1rem);
+  min-width: 200px;
+}
+.kpi-card .label { color: #0f172a; font-size: 0.92rem; margin-bottom: 0.35rem; opacity: 0.9; font-weight: 600; }
+.kpi-card .value { color: #0f172a; font-size: 1.8rem; font-weight: 900; }
+.kpi-card .sub { color: #334155; font-size: 0.85rem; opacity: 0.9; }
+
+/* Card-specific accents */
+.kpi-card.meals {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.25);
+}
+.kpi-card.meals .label, .kpi-card.meals .value { color: #16a34a; }
+
+.kpi-card.workouts {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+.kpi-card.workouts .label, .kpi-card.workouts .value { color: #d97706; }
+
+.kpi-card.challenges {
+  background: rgba(168, 85, 247, 0.12);
+  border-color: rgba(168, 85, 247, 0.25);
+}
+.kpi-card.challenges .label, .kpi-card.challenges .value { color: #a855f7; }
+
+.kpi-card.calories {
+  background: rgba(30, 144, 255, 0.12);
+  border-color: rgba(30, 144, 255, 0.25);
+}
+.kpi-card.calories .label, .kpi-card.calories .value { color: #1e90ff; }
+
+/* Responsive layout: 4 → 2 → 1 cards per row */
+@media (max-width: 1024px) {
+  .kpi-card { flex: 1 1 calc(50% - 1rem); }
+}
+@media (max-width: 560px) {
+  .kpi-card { flex: 1 1 100%; min-width: unset; }
+}
+
+.section-card {
+  background: rgba(255, 255, 255, 0.66);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border-radius: 16px; padding: 1.1rem 1.3rem; margin: 0.75rem 0 1.25rem 0;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.10);
+  border: 1px solid rgba(30,144,255,0.16);
+}
+.section-card h3 { margin: 0 0 0.75rem 0; color: #0f172a; }
+.pill { display: inline-block; padding: 3px 10px; border-radius: 999px; background: rgba(30,144,255,0.16); color: #1e90ff; font-size: 0.78rem; margin-left: 8px; }
+.progress-row { display:flex; align-items:center; gap: 10px; margin: 6px 0; }
+.progress-label { flex: 0 0 160px; color:#334155; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Year toggle buttons styling (GitHub-style) */
+.year-toggle-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.year-toggle-container .stButton > button {
+  min-width: 60px;
+  height: 32px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(30, 144, 255, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.year-toggle-container .stButton > button[data-baseweb="button"] {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #334155;
+}
+
+.year-toggle-container .stButton > button[data-baseweb="button"]:hover {
+  background-color: rgba(30, 144, 255, 0.1);
+  border-color: rgba(30, 144, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.year-toggle-container .stButton > button[data-baseweb="button"][aria-pressed="true"],
+.year-toggle-container .stButton > button[data-baseweb="button"].st-emotion-cache-1aehpvj {
+  background-color: #1e90ff;
+  color: white;
+  border-color: #1e90ff;
+  box-shadow: 0 2px 8px rgba(30, 144, 255, 0.3);
+}
+
+.year-toggle-container .stButton > button[data-baseweb="button"][aria-pressed="true"]:hover {
+  background-color: #1976d2;
+  border-color: #1976d2;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 144, 255, 0.4);
+}
+
+/* Mobile responsive design for year toggles */
+@media (max-width: 480px) {
+  .year-toggle-container {
+    gap: 6px;
+    margin: 10px 0;
+  }
+  
+  .year-toggle-container .stButton > button {
+    min-width: 50px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Streak visualization improvements */
+.streak-section {
+  margin: 20px 0;
+}
+
+.streak-info {
+  margin-bottom: 15px;
+}
+
+/* Heatmap legend styling */
+.heatmap-legend {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+
+.legend-item {
+  display: inline-block;
+  margin-right: 20px;
+  align-items: center;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 480px) {
+  .legend-item {
+    margin-right: 15px;
+    font-size: 0.8rem;
+  }
+  
+  .legend-color {
+    width: 10px;
+    height: 10px;
+  }
+}
+
 </style>
         """,
         unsafe_allow_html=True,
