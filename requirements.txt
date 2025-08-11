@@ -1,0 +1,8 @@
+streamlit
+bcrypt
+python-dotenv
+together
+Pillow
+requests
+typing_extensions
+reportlab
