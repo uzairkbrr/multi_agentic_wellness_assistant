@@ -23,6 +23,8 @@ st.title("Challenges")
 st.caption("Join challenges tailored to your goals and share your progress.")
 
 u = st.session_state.user
+mine = list_user_challenges(u["id"]) or []
+joined_ids = {m["challenge_id"] for m in mine}
 
 st.subheader("Suggested Challenges")
 goal = (u.get("fitness_goal") or "").replace(" ", "_").lower()
@@ -38,18 +40,20 @@ for c in suggested:
             st.caption(f"Difficulty: {c.get('difficulty') or '-'}")
         with cols[2]:
             st.caption(f"Duration: {c.get('duration_days') or '-'} days")
-        if st.button(f"Join #{c['id']}"):
-            join_challenge(u["id"], c["id"])
-            log_activity(u["id"], "challenge_update", {"action": "join", "challenge_id": c["id"]})
-            st.success("Joined challenge.")
+        if c["id"] in joined_ids:
+            st.info("Already joined ✅")
+        else:
+            if st.button(f"Join #{c['id']}", key=f"join_{c['id']}"):
+                join_challenge(u["id"], c["id"])
+                log_activity(u["id"], "challenge_update", {"action": "join", "challenge_id": c["id"]})
+                st.success("Joined challenge.")
 
 st.subheader("My Challenges")
-mine = list_user_challenges(u["id"]) or []
 for m in mine:
     with st.expander(f"{m['title']} — {m['status']} — {m['progress']}%"):
         new_progress = st.slider("Update progress", 0, 100, m["progress"], key=f"pr_{m['id']}")
-        new_status = st.selectbox("Status", ["active", "completed", "dropped"], index=["active", "completed", "dropped"].index(m["status"]))
-        if st.button(f"Save Update {m['challenge_id']}"):
+        new_status = st.selectbox("Status", ["active", "completed", "dropped"], index=["active", "completed", "dropped"].index(m["status"]), key=f"st_{m['id']}")
+        if st.button(f"Save Update {m['challenge_id']}", key=f"save_{m['id']}"):
             update_challenge_progress(u["id"], m["challenge_id"], new_progress, new_status)
             log_activity(u["id"], "challenge_update", {
                 "action": "update",

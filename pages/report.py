@@ -13,6 +13,7 @@ if "user" not in st.session_state or not st.session_state.user:
 
 st.title("Download Wellness Report")
 st.caption("Generate a snapshot of your recent activity.")
+st.info("This report includes a summary of your recent meals with calories, recent workouts with estimated burn, and basic profile details.")
 
 u = st.session_state.user
 

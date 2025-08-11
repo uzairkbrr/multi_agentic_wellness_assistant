@@ -24,7 +24,7 @@ tabs = st.tabs(["Log Meal (Text)", "Analyze Photo", "History"])
 
 with tabs[0]:
     st.subheader("Text Log and Suggestions")
-    user_text = st.text_area("Describe your meal or ask for a plan")
+    user_text = st.text_area("Describe your meal or ask for a plan", placeholder="e.g., Chicken salad with olive oil and a slice of bread")
     if st.button("Get Suggestion") and user_text:
         msgs = [
             {
@@ -89,3 +89,5 @@ with tabs[2]:
     logs = list_meal_logs(st.session_state.user["id"], limit=20)
     for log in logs:
         st.markdown(f"- {log['date']}: {log.get('description') or ''} {('(image) ' + log['image_path']) if log.get('image_path') else ''} {('~' + str(log['calories_est']) + ' kcal') if log.get('calories_est') else ''}")
+
+ 

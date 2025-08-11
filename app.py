@@ -21,7 +21,9 @@ def _ensure_user_state():
 
 
 def login_register_ui():
-    tabs = st.tabs(["Login", "Register"])
+    cols = st.columns([1,2,1])
+    with cols[1]:
+        tabs = st.tabs(["Login", "Register"])
     with tabs[0]:
         st.subheader("Login")
         email = st.text_input("Email", key="login_email")
@@ -53,14 +55,11 @@ def header():
     st.title("Multi-Agentic Wellness Assistant")
     st.caption("Your personal hub for mind, nutrition, and movement")
     if st.session_state.user:
-        cols = st.columns([3, 1])
-        with cols[0]:
-            st.success(f"Logged in as {st.session_state.user['name']}")
-        with cols[1]:
-            if st.button("Logout"):
-                st.session_state.user = None
-                st.session_state.user_id = None
-                st.rerun()
+        st.success(f"Logged in as {st.session_state.user['name']}")
+        if st.button("Logout"):
+            st.session_state.user = None
+            st.session_state.user_id = None
+            st.rerun()
     else:
         st.info("Please log in to use the features.")
     st.markdown("</div>", unsafe_allow_html=True)

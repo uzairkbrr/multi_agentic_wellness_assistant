@@ -139,15 +139,16 @@ def insert_meal_log(
     image_path: str | None,
     calories_est: float | None,
     macros_json: str | None,
+    meal_name: str | None = None,
 ) -> int:
     conn = get_connection()
     cur = conn.cursor()
     cur.execute(
         """
-        INSERT INTO meal_logs (user_id, date, description, image_path, calories_est, macros_json)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO meal_logs (user_id, date, description, image_path, calories_est, macros_json, meal_name)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """,
-        (user_id, date, description, image_path, calories_est, macros_json),
+        (user_id, date, description, image_path, calories_est, macros_json, meal_name),
     )
     log_id = cur.lastrowid
     conn.commit()

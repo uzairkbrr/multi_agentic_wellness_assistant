@@ -29,11 +29,18 @@ with col2:
             {"role": "system", "content": f"Conversation summary so far: {summary}"}
         ]
 
-for msg in st.session_state.mh_messages[1:]:
-    if msg["role"] == "user":
-        st.chat_message("user").write(msg["content"])
-    elif msg["role"] == "assistant":
-        st.chat_message("assistant").write(msg["content"])
+left, right = st.columns([1,3])
+with left:
+    st.subheader("Past Insights")
+    memories = list_memories(st.session_state.user["id"], limit=30)
+    for m in memories:
+        st.markdown(f"- {m['created_at'][:16]} — {m['summary'][:60]}…")
+with right:
+    for msg in st.session_state.mh_messages[1:]:
+        if msg["role"] == "user":
+            st.chat_message("user").write(msg["content"])
+        elif msg["role"] == "assistant":
+            st.chat_message("assistant").write(msg["content"])
 
 prompt = st.chat_input("Share what's on your mind...")
 if prompt:
@@ -59,3 +66,5 @@ with st.expander("Recall past insights"):
     memories = list_memories(st.session_state.user["id"], limit=20)
     for m in memories:
         st.markdown(f"- {m['created_at']}: {m['summary']}")
+
+ 

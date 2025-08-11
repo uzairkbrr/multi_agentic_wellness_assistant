@@ -145,5 +145,7 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
     # Users table migrations
     ensure_column_exists("users", "profile_photo_path", "TEXT")
     ensure_column_exists("users", "avatar_choice", "TEXT")
+    # Meal logs migrations
+    ensure_column_exists("meal_logs", "meal_name", "TEXT")
 
     conn.commit()

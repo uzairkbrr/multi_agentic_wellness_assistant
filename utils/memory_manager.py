@@ -25,4 +25,14 @@ def summarize_messages(messages: List[Dict[str, str]]) -> str:
         temperature=0.2,
         max_tokens=256,
     )
-    return resp.choices[0].message["content"]
+    message = resp.choices[0].message
+    content = getattr(message, "content", None)
+    if isinstance(content, list):
+        parts = []
+        for part in content:
+            if isinstance(part, dict) and part.get("type") == "text":
+                parts.append(part.get("text", ""))
+            elif isinstance(part, str):
+                parts.append(part)
+        content = "\n".join([p for p in parts if p])
+    return content or ""
