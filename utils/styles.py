@@ -36,6 +36,9 @@ def inject_landing_theme() -> None:
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     color: #1e90ff;
     z-index: 1000;
+    margin: 20px auto;
+    max-width: 1200px !important;
+    width: 100%;
 }
 
 .brand-logo {
@@ -68,7 +71,7 @@ def inject_landing_theme() -> None:
 .hero button:hover { background-color: #104e8b; }
 
 /* How It Works Section */
-#how-it-works { padding: 0 2rem 4rem 2rem; max-width: 900px; margin: 0 auto; text-align: center; }
+#how-it-works { padding: 0 2rem 1rem 2rem; max-width: 900px; margin: 0 auto; text-align: center; }
 #how-it-works h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 1.5rem; color: #fff; }
 .steps-container { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
 .step-card { background-color: white; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); padding: 2rem 1.5rem; flex: 1 1 250px; max-width: 15rem; display: flex; flex-direction: column; align-items: center; }
@@ -77,7 +80,7 @@ def inject_landing_theme() -> None:
 .step-desc { font-size: 1rem; color: #334155; line-height: 1.5; }
 
 /* Membership Benefits */
-#membership-benefits { max-width: 900px; margin: 0 auto 6rem auto; padding: 2rem 1rem; text-align: center; }
+#membership-benefits { max-width: 900px; margin: 0 auto 6rem auto; padding: 4rem 1rem 1rem 1rem; text-align: center; }
 #membership-benefits h2 { font-size: 2.6rem; font-weight: 800; margin-bottom: 1.8rem; }
 .benefits-container { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
 .benefit-card { background-color: white; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); padding: 1.8rem 1.2rem; flex: 1 1 200px; max-width: 280px; display: flex; flex-direction: column; align-items: center; }
@@ -88,7 +91,7 @@ def inject_landing_theme() -> None:
 /* Testimonials */
 #testimonials { max-width: 900px; margin: 0 auto 6rem auto; padding: 2rem 1rem; text-align: center; color: #0f172a; }
 #testimonials h2 { font-size: 2.6rem; font-weight: 800; margin-bottom: 2rem; color: #fff; }
-.testimonials-container { display: flex; overflow-x: auto; gap: 2rem; scroll-behavior: smooth; padding-bottom: 1rem; }
+.testimonials-container { display: flex; overflow-x: auto; gap: 3rem; scroll-behavior: smooth; padding-bottom: 1rem; margin-left: 20px;}
 .testimonials-container::-webkit-scrollbar { display: none; }
 .testimonials-container { -ms-overflow-style: none; scrollbar-width: none; }
 .testimonial-card { background-color: white; border-radius: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); padding: 2rem 1.5rem; flex: 0 0 250px; display: flex; flex-direction: column; align-items: center; user-select: none; }
@@ -99,7 +102,7 @@ def inject_landing_theme() -> None:
 /* Pricing */
 #pricing { max-width: 1200px; margin: 0 auto 6rem auto; padding: 2rem 1rem; text-align: center; }
 #pricing h2 { font-size: 2.6rem; font-weight: 800; margin-bottom: 2rem; }
-.pricing-cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+.pricing-cards { display: flex; justify-content: center; gap: 2rem; }
 .pricing-card { background: white; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); padding: 2rem 1.5rem; flex: 1 1 400px; max-width: 350px; width: 100%; text-align: left; color: #334155; display: flex; flex-direction: column; justify-content: space-between; }
 .pricing-card h3 { font-weight: 700; font-size: 1.5rem; margin-bottom: 0.5rem; color: #1e90ff; }
 .pricing-card p.description { color: #555; font-style: italic; margin-bottom: 1rem; }
@@ -125,7 +128,7 @@ def inject_landing_theme() -> None:
 .st-emotion-cache-9ajs8n h2{ margin: 0 auto; max-width: 900px; width: 100%; font-size: 2.6rem; font-weight: 800; padding-bottom: 0; color: #fff; }
 .st-emotion-cache-zuyloh { max-width: 900px; width: 100%; margin: 0 auto; }
 
-footer { position: sticky; bottom: 0; margin: 10px 40px 20px 40px; background: rgba(30, 144, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 15px; padding: 1.5rem 2rem; color: #1e90ff; font-size: 0.9rem; user-select: none; box-shadow: 0 8px 32px 0 rgba(30, 144, 255, 0.1); z-index: 1000; max-width: 1200px; margin-left: auto; margin-right: auto; }
+footer { position: sticky; bottom: 0; margin: 10px 40px 20px 40px; background: rgba(30, 144, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 15px; padding: 1.5rem 2rem; color: #1e90ff; font-size: 0.9rem; user-select: none; box-shadow: 0 8px 32px 0 rgba(30, 144, 255, 0.1); z-index: 1000; max-width: 1200px !important; margin-left: auto; margin-right: auto; }
 .footer-links-container { display: flex; align-items: start; justify-content: space-around; margin-top: 30px; }
 footer .footer-logo { font-weight: 700; font-size: 1.3rem; cursor: default; }
 footer .footer-links { display: flex; flex-direction: column; gap: 7px; flex-wrap: wrap; font-size: 1rem; justify-content: center; }
@@ -320,6 +323,37 @@ footer .social-icons a:hover { color: #fff; }
     height: 10px;
   }
 }
+
+.st-emotion-cache-9ajs8n h1,
+.st-emotion-cache-vqhohv p,
+.st-emotion-cache-9ajs8n h3,
+.st-emotion-cache-9ajs8n h3,
+.st-emotion-cache-4rp1ik,
+.st-emotion-cache-13na8ym,
+.st-emotion-cache-a0ovpn,
+.st-emotion-cache-v3w3zg,
+.st-emotion-cache-8fjoqp,
+.st-emotion-cache-1i94pul,
+.st-emotion-cache-9ajs8n p
+{
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#hero p {
+  margin-bottom: 30px;
+}
+
+.st-emotion-cache-1i94pul {
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.st-emotion-cache-9ajs8n h3 {
+  padding: 0
+}
+
 
 </style>
         """,

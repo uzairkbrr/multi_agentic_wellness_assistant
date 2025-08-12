@@ -10,14 +10,6 @@ st.markdown(
     """
 <div class="navbar">
     <div class="brand-logo">MA Wellness</div>
-    <div class="nav-links">
-        <a href="#hero">Home</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#membership-benefits">Benefits</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#contact">Contact</a>
-    </div>
     <div class="nav-button">
         <a href="/?signup=1" class="get-started-btn">Get Started</a>
     </div>
@@ -25,6 +17,15 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+#  <div class="nav-links">
+#     <a href="#hero">Home</a>
+#     <a href="#how-it-works">How It Works</a>
+#     <a href="#testimonials">Testimonials</a>
+#     <a href="#membership-benefits">Benefits</a>
+#     <a href="#pricing">Pricing</a>
+#     <a href="#contact">Contact</a>
+# </div>
 
 
 st.markdown(
