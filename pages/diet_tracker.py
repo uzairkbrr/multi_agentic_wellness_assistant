@@ -5,7 +5,7 @@ import streamlit as st
 from backend.database import init_db
 from PIL import Image, ImageOps
 
-from agents.diet import get_diet_suggestion, extract_meal_name
+from agents.diet import analyze_meal_text, extract_meal_name
 from agents.vision import analyze_meal_image
 from backend.crud import insert_meal_log, list_meal_logs, log_activity
 from utils.styles import inject_landing_theme
@@ -21,24 +21,21 @@ if "user" not in st.session_state or not st.session_state.user:
 
 st.title("Diet Tracker")
 
-tabs = st.tabs(["Log Meal (Text)", "Analyze Photo", "History"])
+tabs = st.tabs(["Text Analysis", "Photo Analysis", "History"])
 
 with tabs[0]:
-    st.subheader("Text Log and Suggestions")
-    user_text = st.text_area("Describe your meal or ask for a plan", placeholder="e.g., Chicken salad with olive oil and a slice of bread")
-    if st.button("Get Suggestion") and user_text:
-        msgs = [
-            {
-                "role": "system",
-                "content": (
-                    "You are a knowledgeable diet assistant. Provide practical, budget-aware suggestions. "
-                    "Respond in clear English paragraphs only. Do not output JSON or code blocks."
-                ),
-            },
-            {"role": "user", "content": user_text},
-        ]
-        reply = get_diet_suggestion(msgs)
+    st.subheader("Text-Based Meal Analysis")
+    user_text = st.text_area("Describe your meal for nutritional analysis", placeholder="e.g., A plate of fragrant biryani with long basmati rice, spiced chicken, fried onions, and raita")
+    if st.button("Analyze Meal") and user_text:
+        with st.spinner("Analyzing meal nutrition..."):
+            reply = analyze_meal_text(user_text)
         st.markdown(reply)
+        # Extract a concise meal name from the user text
+        try:
+            meal_name = extract_meal_name(user_text)
+        except Exception:
+            meal_name = None
+        
         # Save a simple log
         insert_meal_log(
             user_id=st.session_state.user["id"],
@@ -47,11 +44,12 @@ with tabs[0]:
             image_path=None,
             calories_est=None,
             macros_json=None,
+            meal_name=meal_name,
         )
         log_activity(st.session_state.user["id"], "meal_log", {"description": user_text})
 
 with tabs[1]:
-    st.subheader("Upload Meal Photo for Vision Analysis")
+    st.subheader("Photo-Based Meal Analysis")
     upload = st.file_uploader("Upload image", type=["jpg", "jpeg", "png"])
     if upload:
         img_bytes = upload.read()

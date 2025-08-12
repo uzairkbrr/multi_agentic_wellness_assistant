@@ -35,7 +35,8 @@ def generate_pdf(user: dict) -> bytes:
     y -= 15
     c.setFont("Helvetica", 10)
     for m in list_meal_logs(user["id"], limit=10):
-        line = f"- {m['date']} | {m.get('description') or ''} | kcal: {m.get('calories_est') or '-'}"
+        meal_display = m.get('meal_name') or m.get('description') or 'Meal'
+        line = f"- {m['date']} | {meal_display} | kcal: {m.get('calories_est') or '-'}"
         c.drawString(50, y, line[:100])
         y -= 12
         if y < 80:

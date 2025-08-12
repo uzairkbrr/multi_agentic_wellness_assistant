@@ -338,7 +338,7 @@ footer .social-icons a:hover { color: #fff; }
 {
   max-width: 900px;
   width: 100%;
-  margin: 0 auto;
+  margin-inline: auto;
 }
 
 #hero p {
@@ -349,11 +349,6 @@ footer .social-icons a:hover { color: #fff; }
   padding: 2rem;
   border-radius: 16px;
 }
-
-.st-emotion-cache-9ajs8n h3 {
-  padding: 0
-}
-
 
 </style>
         """,
