@@ -347,7 +347,7 @@ footer .social-icons a:hover { color: #fff; }
 .st-emotion-cache-18kf3ut,
  .st-emotion-cache-18tdrd9 h2
  .st-emotion-cache-tn0cau{
-    max-width: 900px;
+    max-width: 1000px;
     width: 100%;
     margin-inline: auto;
 }
