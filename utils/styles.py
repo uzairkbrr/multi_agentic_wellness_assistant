@@ -6,17 +6,6 @@ def inject_landing_theme() -> None:
     st.markdown(
         """
 <style>
-
-/* Custom styles for contact form header and faq questions container */
-.st-emotion-cache-zy6yx3 {
-    padding-block: 2rem;
-}
-.st-emotion-cache-18kf3ut , .st-emotion-cache-18tdrd9 h2{
-    max-width: 900px;
-    width: 100%;
-    margin: 0 auto;
-}
-
 /* --- Navbar Styles --- */
 .navbar {
     position: sticky;
@@ -133,14 +122,15 @@ footer { position: sticky; bottom: 0; margin: 10px 40px 20px 40px; background: r
 footer .footer-logo { font-weight: 700; font-size: 1.3rem; cursor: default; }
 footer .footer-links { display: flex; flex-direction: column; gap: 7px; flex-wrap: wrap; font-size: 1rem; justify-content: center; }
 footer .footer-links a { color: #1e90ff; text-decoration: none; font-weight: 600; position: relative; transition: color 0.3s ease; }
-footer .footer-links a::after { content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background-color: #ffffff; transition: width 0.3s ease; }
+footer .footer-links a::after, { content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background-color: #ffffff; transition: width 0.3s ease; }
 footer .footer-links a:hover { color: #fff; }
-.footer-links a:hover::after { width: 100%; }
+.footer-links a:hover::after{ width: 100%; }
 footer .social-icons { display: flex; gap: 7px; justify-content: center; flex-direction: column; }
 footer .social-icons a { color: #1e90ff; font-size: 1rem; text-decoration: none; transition: color 0.3s ease; position: relative; }
 footer .social-icons a::after { content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background-color: #ffffff; transition: width 0.3s ease; }
 footer .social-icons a:hover::after { width: 100%; }
 footer .social-icons a:hover { color: #fff; }
+.footer-author {text-align: center; margin-top: 20px; display: relative; transition: all .5s}
 
 @media (max-width: 480px) { footer { flex-direction: column; gap: 1.5rem; } }
 
@@ -348,6 +338,21 @@ footer .social-icons a:hover { color: #fff; }
 .st-emotion-cache-1i94pul {
   padding: 2rem;
   border-radius: 16px;
+}
+
+.st-emotion-cache-zy6yx3 {
+    padding-block: 2rem;
+}
+
+.st-emotion-cache-18kf3ut , .st-emotion-cache-18tdrd9 h2{
+    max-width: 900px;
+    width: 100%;
+    margin-inline: auto;
+}
+
+.st-emotion-c,
+.st-emotion-cache-rra9ig > div:first-child {
+  display: none;
 }
 
 </style>

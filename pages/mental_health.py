@@ -36,9 +36,9 @@ with col2:
         ]
 
 left, right = st.columns([1,3])
-with left:
-    # Past Insights section removed
-    pass
+# with left:
+#     # Past Insights section removed
+#     pass
 with right:
     for msg in st.session_state.mh_messages[1:]:
         if msg["role"] == "user":

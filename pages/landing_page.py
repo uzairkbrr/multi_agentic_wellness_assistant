@@ -18,16 +18,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-#  <div class="nav-links">
-#     <a href="#hero">Home</a>
-#     <a href="#how-it-works">How It Works</a>
-#     <a href="#testimonials">Testimonials</a>
-#     <a href="#membership-benefits">Benefits</a>
-#     <a href="#pricing">Pricing</a>
-#     <a href="#contact">Contact</a>
-# </div>
-
-
 st.markdown(
     """
 <section class="hero" id="hero">
@@ -234,22 +224,8 @@ st.markdown(
     """
 <footer>
     <div class="footer-container">
-    <div class="footer-links-container">
-        <div class="footer-logo">MA Wellness</div>
-            <div class="footer-links">
-                <a href="#hero">Home</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#membership-benefits">Benefits</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="footer-links">
-                <a href="#hero">About</a>
-                <a href="#how-it-works">Blog</a>
-                <a href="#membership-benefits">Financing</a>
-                <a href="#testimonials">Patents</a>
-                <a href="#contact">Therapy Locator</a>
-            </div>
+        <div class="footer-links-container">
+            <div class="footer-logo">MA Wellness</div>
             <div class="social-icons">
                 <a href="https://uzairkbrr.netlify.app/" aria-label="Portfolio" title="Portfolio">Portfolio</a>
                 <a href="https://www.linkedin.com/in/uzairkbrr/" aria-label="LinkedIn" title="LinkedIn">Linkedin</a>
@@ -257,6 +233,9 @@ st.markdown(
                 <a href="https://x.com/uzairkbrr" aria-label="Twitter" title="Twitter">Twitter</a>
                 <a href="https://www.facebook.com/uzairkbrr" aria-label="Facebook" title="Facebook">Facebook</a>
             </div>
+        </div>
+        <div class='footer-author'>
+            <a href="https://uzairkbrr.netlify.app/" aria-label="Portfolio" title="Portfolio">Built with 🫶 by Uzair Ahmad</a>
         </div>
     </div>
 
