@@ -324,9 +324,12 @@ footer .social-icons a:hover { color: #fff; }
 .st-emotion-cache-v3w3zg,
 .st-emotion-cache-8fjoqp,
 .st-emotion-cache-1i94pul,
-.st-emotion-cache-9ajs8n p
+.st-emotion-cache-9ajs8n p,
+.st-emotion-cache-18kf3ut,
+.st-emotion-cache-18tdrd9 h2,
+.st-emotion-cache-tn0cau
 {
-  max-width: 900px;
+  max-width: 1100px;
   width: 100%;
   margin-inline: auto;
 }
@@ -342,14 +345,6 @@ footer .social-icons a:hover { color: #fff; }
 
 .st-emotion-cache-zy6yx3 {
     padding-block: 2rem;
-}
-
-.st-emotion-cache-18kf3ut,
- .st-emotion-cache-18tdrd9 h2
- .st-emotion-cache-tn0cau{
-    max-width: 1000px;
-    width: 100%;
-    margin-inline: auto;
 }
 
 .st-emotion-c,
