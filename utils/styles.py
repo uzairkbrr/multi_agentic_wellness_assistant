@@ -257,7 +257,7 @@ footer .social-icons a:hover { color: #fff; }
     gap: 6px;
     margin: 10px 0;
   }
-  
+
   .year-toggle-container .stButton > button {
     min-width: 50px;
     height: 28px;
@@ -307,7 +307,7 @@ footer .social-icons a:hover { color: #fff; }
     margin-right: 15px;
     font-size: 0.8rem;
   }
-  
+
   .legend-color {
     width: 10px;
     height: 10px;
@@ -350,7 +350,8 @@ footer .social-icons a:hover { color: #fff; }
 }
 
 .st-emotion-c,
-.st-emotion-cache-rra9ig > div:first-child {
+.st-emotion-cache-rra9ig > div:first-child,
+.st-emotion-cache-1permvm > div:first-child {
   display: none;
 }
 
