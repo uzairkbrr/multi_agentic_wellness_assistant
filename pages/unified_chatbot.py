@@ -106,7 +106,6 @@ def main():
         right: 0;
         background: #343541;
         padding: 0.75rem 1rem;
-        border-top: 1px solid #565869;
         z-index: 100;
     }
 
@@ -149,7 +148,9 @@ def main():
         text-align: center;
         color: #8e8ea0;
         font-size: 0.8rem;
-        margin-top: 0.25rem;
+        position: fixed;
+        bottom: 20px;
+        left: 650px;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -194,7 +195,6 @@ def main():
         with col2:
             send_button = st.button("➤", key=f"send_button_{st.session_state.input_key}")
 
-    st.markdown('<div class="disclaimer">Wellness Assistant can make mistakes. Check important info.</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)  # input-container
 
     # --- Handle sending ---
