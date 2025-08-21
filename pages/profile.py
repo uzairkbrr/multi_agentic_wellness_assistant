@@ -228,8 +228,7 @@ if mode == "View":
     )
 
     st.divider()
-    st.page_link("pages/challenges.py", label="View Challenges ➜", icon="🔥")
-    st.page_link("pages/dashboard.py", label="Go to Dashboard ➜", icon="🏠")
+    st.page_link("pages/unified_chatbot.py", label="Go to Chat ➜", icon="🤖")
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Close the main profile container
