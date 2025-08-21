@@ -7,6 +7,12 @@ MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
 
 
 def _client() -> Together:
+    if not TOGETHER_API_KEY:
+        raise ValueError(
+            "❌ TOGETHER_API_KEY is missing. "
+            "For localhost: Create a .env file with TOGETHER_API_KEY=your_key_here\n"
+            "For deployment: Set TOGETHER_API_KEY in Streamlit secrets"
+        )
     return Together(api_key=TOGETHER_API_KEY)
 
 
